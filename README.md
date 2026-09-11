@@ -76,19 +76,3 @@ Run a briefing manually:
 ```bash
 python -m app.jobs.daily_briefing
 ```
-
-## Environment variables
-
-See `.env.example`. Secrets are never committed to the repository.
-
-## Daily schedule
-
-The GitHub Actions workflow runs the briefing at **9:00 AM America/Toronto**. GitHub supports timezone-aware scheduled workflows, including IANA time zones. The workflow can also be dispatched manually for testing. citehttps://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax
-
-## Deployment
-
-The application is containerized and designed for Azure Container Apps. Azure Container Apps supports deploying a public container image with `az containerapp up`; the final deployment will expose the FastAPI health endpoint for verification. citehttps://learn.microsoft.com/en-us/azure/container-apps/get-started
-
-## Project status
-
-This repository is being built incrementally from ingestion through production deployment. The first milestone establishes the ingestion, normalization, deduplication, ranking, summarization, delivery, tests, container, and scheduled workflow foundations.
