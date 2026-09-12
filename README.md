@@ -44,7 +44,7 @@ Official / trusted AI RSS sources
 
 ## Dashboard
 
-GitHub Pages is used as the hosting layer. The dashboard is completely static: GitHub Actions generates the data files and deploys them with the site. GitHub Pages supports custom GitHub Actions workflows for this deployment model. citeturn0search0
+GitHub Pages is the hosting layer. The dashboard is completely static: GitHub Actions generates the data files and deploys them with the site.
 
 The site does not expose the Gemini API key. The key is used only inside the GitHub Actions job through `GEMINI_API_KEY`.
 
@@ -66,7 +66,7 @@ The site does not expose the Gemini API key. The key is used only inside the Git
 
 The daily intelligence workflow runs at **9:00 AM America/Toronto** and can also be started manually from GitHub Actions. Normal code pushes do not trigger the Gemini briefing workflow, preventing unnecessary model calls and notification noise.
 
-The workflow commits the generated historical JSON back to the repository using `GITHUB_TOKEN`. GitHub documents that pushes made with `GITHUB_TOKEN` do not recursively start another workflow run. citeturn1search0
+The workflow commits the generated historical JSON back to the repository using `GITHUB_TOKEN`. GitHub's workflow model prevents events created with `GITHUB_TOKEN` from recursively starting another workflow run.
 
 ## Local development
 
