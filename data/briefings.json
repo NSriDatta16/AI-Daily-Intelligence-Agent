@@ -1,1 +1,73 @@
-[]
+[
+  {
+    "generated_at": "2026-09-12T19:43:34.452749+00:00",
+    "lookback_hours": 24,
+    "article_count": 7,
+    "briefing": "# Daily AI Intelligence Briefing\n\n---\n\n### Major Developments\n\n#### Perplexity Adopts OpenAI’s GPT-6 Astra for End-to-End Infrastructure and Code Tasks\n* **What happened:** Perplexity has integrated OpenAI's GPT-6 Astra model into its core operational workflows. The search company is using the model to write internal communications, execute software code changes, and monitor production systems, requiring far less frequent human supervision compared to prior models.\n* **Why it matters:** This marks a significant operational milestone where a major AI company grants a next-generation frontier model direct authority over production software systems and infrastructure monitoring under reduced human check-in constraints.\n* **Source:** [OpenAI](https://openai.com/index/perplexity-improving-accuracy-with-astra)\n\n#### AI Leaders Discuss Synchronized Proposals to \"Pace the Frontier\"\n* **What happened:** Anthropic CEO Dario Amodei and OpenAI CEO Sam Altman are discussing frameworks to \"pace the frontier,\" exploring structured plans to manage and potentially slow the speed of advanced frontier model deployment.\n* **Why it matters:** Any deliberate agreement or policy framework among leading closed-source frontier labs to decelerate training or deployment schedules could alter the competitive landscape, potentially shifting focus toward safety auditing, infrastructure efficiency, and open-weight alternatives.\n* **Source:** [TechCrunch AI](https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/)\n\n---\n\n### Research\n\n* **Tail-Aware Turn Scheduling Cuts Agent Workflow Latency:** Researchers introduced a scheduling method for agentic LLM workflows that decouples turn readiness from turn release. Using a mean-Conditional Value-at-Risk (CVaR) objective to prioritize turns under heavy system contention, the method reduced P95 workflow flow time by up to $3.50\\times$ compared to eager release policies. [arXiv AI](https://arxiv.org/abs/2609.10964)\n* **Benchmark Radar Launched to Track AI Evaluation Metrics:** A new living catalog and search engine aggregates 1,283 source records and 12,916 numerical observations across LLM, coding, agentic tool-use, safety, and reasoning evaluations. The system provides score histories, Pareto frontier views against resource usage, and benchmark saturation tracking. [arXiv AI](https://arxiv.org/abs/2609.11115)\n* **Agent Incident Registry (AIR) Catalogues System Failures:** Researchers published the Agent Incident Registry, a source-linked database tracking public AI agent security and safety incidents. The tool categorizes realized harms versus demonstrated safety failures to audit evaluation boundaries and help engineers avoid repeating known agent tool-use failures. [arXiv AI](https://arxiv.org/abs/2609.11030)\n\n---\n\n### Industry & Open Source\n\n* **Mecka AI Nears $500M Valuation for Robotics Training Data:** Two-year-old startup Mecka AI is finalizing a Sequoia-led funding round approaching a $500 million valuation, driven by enterprise demand for physical and simulated robot training data. [TechCrunch AI](https://techcrunch.com/2026/09/11/mecka-ai-nears-500m-valuation-in-sequoia-led-deal-amid-rush-for-robot-training-data/)\n* **YC Push for Model Distillation in US Open-Weight Ecosystem:** Y Combinator CEO Garry Tan called on U.S. open-weight AI labs to distill American frontier models. Tan argued that leveraging distillation techniques is necessary to ensure competitive U.S. open-weight models relative to Chinese open-weight offerings. [TechCrunch AI](https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/)\n\n---\n\n### What To Watch\n\n* **Frontier Pacing Details:** Watch for concrete policy proposals or formal commitments from Anthropic and OpenAI regarding how \"pacing the frontier\" would be measured or enforced across competing labs.\n* **Agentic Queue Management:** Monitor whether inference providers adopt tail-aware queue management algorithms (like mean-CVaR turn release) to mitigate latency spikes in multi-turn agent execution chains.",
+    "articles": [
+      {
+        "title": "Benchmark Radar: A Living Database and Search Engine for AI Benchmarks and Evaluation",
+        "url": "https://arxiv.org/abs/2609.11115",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 37.035,
+        "summary": "arXiv:2609.11115v1 Announce Type: new \nAbstract: Benchmark researchers and developers of large language models (LLMs) and other AI systems need to find relevant evaluations, locate their benchmark datasets and code, and understand the settings behind reported scores. We present Benchmark Radar, a living database and search engine for retrieval and discovery of AI benchmarks, covering LLM evaluation, agentic and tool-use benchmarks, coding, reasoning, safety, and domain-specific evaluations. The system combines daily discovery of benchmark papers, repositories, datasets, and releases with a searchable benchmark catalog, mentions in model cards and technical reports, and score histories. It retains source identities and citations so readers can inspect candidate benchmarks and their evaluation evidence. Daily discovery draws on 37 sources: 13 direct connectors and 24 first-party research and engineering feeds. The catalog contains 1,283 source records drawn from 4 benchmark catalogs and 12,916 numeric observations on 790 records. We describe collection and retrieval, audit the full catalog, and examine benchmark saturation, adoption trends, and the limits of score comparisons. A worked example walks through a complete prior-art search, showing how to query the catalog and inspect benchmark evidence when designing a new evaluation. We release the web dashboard with a benchmark leaderboard, a Pareto frontier view of score against measured use, saturation and trend views, daily feeds, downloadable evidence, a command-line interface (CLI) for offline queries, and reproducible analysis."
+      },
+      {
+        "title": "Decoupling Readiness from Release for Tail-Aware Scheduling of Agentic LLM Workflows",
+        "url": "https://arxiv.org/abs/2609.10964",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 29.785,
+        "summary": "arXiv:2609.10964v1 Announce Type: new \nAbstract: Agentic LLM workflows consist of sequences of model turns interleaved with tool interactions, so their end-to-end completion time depends not only on inference speed but also on when ready turns are released. Most runtimes release each turn immediately upon readiness. Under contention, this eager release policy can accumulate released but unfinished work; once submitted, those turns can no longer be reordered by the workflow-level policy, increasing tail latency. We present a tail-risk-aware turn release scheduling method that jointly decides which ready turn to release next and how much released but unfinished work to maintain. The method uses a mean--Conditional Value-at-Risk (CVaR) objective to capture the evolving tail risk of unfinished workflows, incorporates online estimates of turn work when prioritizing ready turns, and adapts the released work budget to observed queue pressure. We evaluate the method using real agent execution traces from software engineering tasks across multiple LLMs and workflow arrival rates. The method performs comparably to eager release under light load and substantially reduces the P95 of workflow flow time under contention, achieving up to a \\(3.50\\times\\) speedup."
+      },
+      {
+        "title": "The Agent Incident Registry: Toward Preventing Repeated AI Agent Failures",
+        "url": "https://arxiv.org/abs/2609.11030",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 21.785,
+        "summary": "arXiv:2609.11030v1 Announce Type: new \nAbstract: AI agents increasingly act through tools and delegated authority, but general incident repositories rarely capture the mechanisms needed to compare public failures with agent-security evaluations. We present the Agent Incident Registry (AIR), a source-linked catalog containing \\N{} records of agent-related events disclosed from \\Yfirst{} through \\Ylast{}. Each record includes supporting evidence, a stable identifier, and missingness-aware labels for causal role, disclosure class, mechanism, and outcome. Among the \\Nprimary{} generative-system records in which the agent acted, \\Rprimary{} involved realized harm (\\Pprimary\\%). Realized outcomes concentrate in in-the-wild and safety-failure records, while responsible disclosures and research demonstrations are overwhelmingly demonstrated; the aggregate share therefore characterizes collection composition rather than deployment risk. After initial curation, a second human reviewer checked all \\N{} records and their existing labels for completeness and correctness. In a deployment-analogue audit, InjecAgent's \\NInjecAgentCases{} cases occupy three of AIR's twelve surfaces and are all attacker-triggered, whereas AIR contains \\Nsafety{} no-adversary safety failures. AIR supports source-grounded case retrieval and evaluation-scope auditing, not failure-rate or control-efficacy estimation."
+      },
+      {
+        "title": "Perplexity trusts GPT-6 Astra with end-to-end systems",
+        "url": "https://openai.com/index/perplexity-improving-accuracy-with-astra",
+        "source": "OpenAI",
+        "category": "industry",
+        "published_at": "2026-09-14T00:00:00+00:00",
+        "importance_score": 9.0,
+        "summary": "Perplexity uses Astra to write communications, change software, and monitor production systems, and checks in much less frequently than with earlier models."
+      },
+      {
+        "title": "Anthropic CEO outlines plan to slow AI development",
+        "url": "https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-12T19:34:44+00:00",
+        "importance_score": 8.732,
+        "summary": "Anthropic's Dario Amodei and OpenAI's Sam Altman seem to agree that it's time to \"pace the frontier.\" What would that actually look like?"
+      },
+      {
+        "title": "Y Combinator’s Garry Tan wants US open-weight AI labs to ‘distill’ frontier models, too",
+        "url": "https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-11T20:59:47+00:00",
+        "importance_score": 7.91,
+        "summary": "Tan wants smaller, American open-weight AI labs to use the same kind of training techniques on American frontier AI labs, giving the U.S. a more robust set of open-weight options that aren’t Chinese."
+      },
+      {
+        "title": "Mecka AI nears $500M valuation in Sequoia-led deal amid rush for robot training data",
+        "url": "https://techcrunch.com/2026/09/11/mecka-ai-nears-500m-valuation-in-sequoia-led-deal-amid-rush-for-robot-training-data/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-11T22:58:17+00:00",
+        "importance_score": 6.156,
+        "summary": "The round for the two-year-old startup is coming together months after Mecka announced its Series A."
+      }
+    ]
+  }
+]

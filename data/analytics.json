@@ -1,9 +1,160 @@
 {
-  "generated_at": null,
-  "total_articles": 0,
-  "total_briefings": 0,
-  "sources": [],
-  "categories": [],
-  "top_articles": [],
-  "repeated_topics": []
+  "generated_at": "2026-09-12T19:43:34.456367+00:00",
+  "total_articles": 7,
+  "total_briefings": 1,
+  "sources": [
+    {
+      "source": "TechCrunch AI",
+      "count": 3
+    },
+    {
+      "source": "arXiv AI",
+      "count": 3
+    },
+    {
+      "source": "OpenAI",
+      "count": 1
+    }
+  ],
+  "categories": [
+    {
+      "category": "news",
+      "count": 3
+    },
+    {
+      "category": "research",
+      "count": 3
+    },
+    {
+      "category": "industry",
+      "count": 1
+    }
+  ],
+  "top_articles": [
+    {
+      "title": "Benchmark Radar: A Living Database and Search Engine for AI Benchmarks and Evaluation",
+      "url": "https://arxiv.org/abs/2609.11115",
+      "source": "arXiv AI",
+      "category": "research",
+      "published_at": "2026-09-12T00:00:00-04:00",
+      "importance_score": 37.035,
+      "summary": "arXiv:2609.11115v1 Announce Type: new \nAbstract: Benchmark researchers and developers of large language models (LLMs) and other AI systems need to find relevant evaluations, locate their benchmark datasets and code, and understand the settings behind reported scores. We present Benchmark Radar, a living database and search engine for retrieval and discovery of AI benchmarks, covering LLM evaluation, agentic and tool-use benchmarks, coding, reasoning, safety, and domain-specific evaluations. The system combines daily discovery of benchmark papers, repositories, datasets, and releases with a searchable benchmark catalog, mentions in model cards and technical reports, and score histories. It retains source identities and citations so readers can inspect candidate benchmarks and their evaluation evidence. Daily discovery draws on 37 sources: 13 direct connectors and 24 first-party research and engineering feeds. The catalog contains 1,283 source records drawn from 4 benchmark catalogs and 12,916 numeric observations on 790 records. We describe collection and retrieval, audit the full catalog, and examine benchmark saturation, adoption trends, and the limits of score comparisons. A worked example walks through a complete prior-art search, showing how to query the catalog and inspect benchmark evidence when designing a new evaluation. We release the web dashboard with a benchmark leaderboard, a Pareto frontier view of score against measured use, saturation and trend views, daily feeds, downloadable evidence, a command-line interface (CLI) for offline queries, and reproducible analysis."
+    },
+    {
+      "title": "Decoupling Readiness from Release for Tail-Aware Scheduling of Agentic LLM Workflows",
+      "url": "https://arxiv.org/abs/2609.10964",
+      "source": "arXiv AI",
+      "category": "research",
+      "published_at": "2026-09-12T00:00:00-04:00",
+      "importance_score": 29.785,
+      "summary": "arXiv:2609.10964v1 Announce Type: new \nAbstract: Agentic LLM workflows consist of sequences of model turns interleaved with tool interactions, so their end-to-end completion time depends not only on inference speed but also on when ready turns are released. Most runtimes release each turn immediately upon readiness. Under contention, this eager release policy can accumulate released but unfinished work; once submitted, those turns can no longer be reordered by the workflow-level policy, increasing tail latency. We present a tail-risk-aware turn release scheduling method that jointly decides which ready turn to release next and how much released but unfinished work to maintain. The method uses a mean--Conditional Value-at-Risk (CVaR) objective to capture the evolving tail risk of unfinished workflows, incorporates online estimates of turn work when prioritizing ready turns, and adapts the released work budget to observed queue pressure. We evaluate the method using real agent execution traces from software engineering tasks across multiple LLMs and workflow arrival rates. The method performs comparably to eager release under light load and substantially reduces the P95 of workflow flow time under contention, achieving up to a \\(3.50\\times\\) speedup."
+    },
+    {
+      "title": "The Agent Incident Registry: Toward Preventing Repeated AI Agent Failures",
+      "url": "https://arxiv.org/abs/2609.11030",
+      "source": "arXiv AI",
+      "category": "research",
+      "published_at": "2026-09-12T00:00:00-04:00",
+      "importance_score": 21.785,
+      "summary": "arXiv:2609.11030v1 Announce Type: new \nAbstract: AI agents increasingly act through tools and delegated authority, but general incident repositories rarely capture the mechanisms needed to compare public failures with agent-security evaluations. We present the Agent Incident Registry (AIR), a source-linked catalog containing \\N{} records of agent-related events disclosed from \\Yfirst{} through \\Ylast{}. Each record includes supporting evidence, a stable identifier, and missingness-aware labels for causal role, disclosure class, mechanism, and outcome. Among the \\Nprimary{} generative-system records in which the agent acted, \\Rprimary{} involved realized harm (\\Pprimary\\%). Realized outcomes concentrate in in-the-wild and safety-failure records, while responsible disclosures and research demonstrations are overwhelmingly demonstrated; the aggregate share therefore characterizes collection composition rather than deployment risk. After initial curation, a second human reviewer checked all \\N{} records and their existing labels for completeness and correctness. In a deployment-analogue audit, InjecAgent's \\NInjecAgentCases{} cases occupy three of AIR's twelve surfaces and are all attacker-triggered, whereas AIR contains \\Nsafety{} no-adversary safety failures. AIR supports source-grounded case retrieval and evaluation-scope auditing, not failure-rate or control-efficacy estimation."
+    },
+    {
+      "title": "Perplexity trusts GPT-6 Astra with end-to-end systems",
+      "url": "https://openai.com/index/perplexity-improving-accuracy-with-astra",
+      "source": "OpenAI",
+      "category": "industry",
+      "published_at": "2026-09-14T00:00:00+00:00",
+      "importance_score": 9.0,
+      "summary": "Perplexity uses Astra to write communications, change software, and monitor production systems, and checks in much less frequently than with earlier models."
+    },
+    {
+      "title": "Anthropic CEO outlines plan to slow AI development",
+      "url": "https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/",
+      "source": "TechCrunch AI",
+      "category": "news",
+      "published_at": "2026-09-12T19:34:44+00:00",
+      "importance_score": 8.732,
+      "summary": "Anthropic's Dario Amodei and OpenAI's Sam Altman seem to agree that it's time to \"pace the frontier.\" What would that actually look like?"
+    },
+    {
+      "title": "Y Combinator’s Garry Tan wants US open-weight AI labs to ‘distill’ frontier models, too",
+      "url": "https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/",
+      "source": "TechCrunch AI",
+      "category": "news",
+      "published_at": "2026-09-11T20:59:47+00:00",
+      "importance_score": 7.91,
+      "summary": "Tan wants smaller, American open-weight AI labs to use the same kind of training techniques on American frontier AI labs, giving the U.S. a more robust set of open-weight options that aren’t Chinese."
+    },
+    {
+      "title": "Mecka AI nears $500M valuation in Sequoia-led deal amid rush for robot training data",
+      "url": "https://techcrunch.com/2026/09/11/mecka-ai-nears-500m-valuation-in-sequoia-led-deal-amid-rush-for-robot-training-data/",
+      "source": "TechCrunch AI",
+      "category": "news",
+      "published_at": "2026-09-11T22:58:17+00:00",
+      "importance_score": 6.156,
+      "summary": "The round for the two-year-old startup is coming together months after Mecka announced its Series A."
+    }
+  ],
+  "repeated_topics": [
+    {
+      "topic": "perplexity",
+      "mentions": 1
+    },
+    {
+      "topic": "trusts",
+      "mentions": 1
+    },
+    {
+      "topic": "systems",
+      "mentions": 1
+    },
+    {
+      "topic": "astra",
+      "mentions": 1
+    },
+    {
+      "topic": "development",
+      "mentions": 1
+    },
+    {
+      "topic": "outlines",
+      "mentions": 1
+    },
+    {
+      "topic": "anthropic",
+      "mentions": 1
+    },
+    {
+      "topic": "living",
+      "mentions": 1
+    },
+    {
+      "topic": "evaluation",
+      "mentions": 1
+    },
+    {
+      "topic": "radar",
+      "mentions": 1
+    },
+    {
+      "topic": "benchmark",
+      "mentions": 1
+    },
+    {
+      "topic": "search",
+      "mentions": 1
+    },
+    {
+      "topic": "database",
+      "mentions": 1
+    },
+    {
+      "topic": "engine",
+      "mentions": 1
+    },
+    {
+      "topic": "benchmarks",
+      "mentions": 1
+    }
+  ]
 }
