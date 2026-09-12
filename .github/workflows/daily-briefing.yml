@@ -1,10 +1,19 @@
-name: Daily AI Briefing
+name: Daily AI Intelligence
 
 on:
   workflow_dispatch:
   schedule:
     - cron: '0 9 * * *'
       timezone: 'America/Toronto'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   briefing:
@@ -15,7 +24,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - name: Generate and deliver briefing
+      - name: Generate briefing and dashboard data
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
@@ -31,4 +40,11 @@ jobs:
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_WHATSAPP_FROM: ${{ vars.TWILIO_WHATSAPP_FROM }}
           WHATSAPP_TO: ${{ vars.WHATSAPP_TO }}
-        run: PYTHONPATH=. python -m app.jobs.daily_briefing
+        run: PYTHONPATH=. python -m app.jobs.publish_site
+      - name: Build Pages site
+        run: cp web/index.html site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
