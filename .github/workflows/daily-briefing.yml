@@ -33,6 +33,14 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-3.6-flash
+          EMAIL_ENABLED: ${{ vars.EMAIL_ENABLED || 'false' }}
+          SMTP_HOST: ${{ vars.SMTP_HOST || 'smtp.gmail.com' }}
+          SMTP_PORT: ${{ vars.SMTP_PORT || '587' }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          DASHBOARD_URL: https://nsridatta16.github.io/AI-Daily-Intelligence-Agent/
         run: PYTHONPATH=. python -m app.jobs.publish_site
       - name: Build Pages site
         run: cp web/index.html site/index.html
