@@ -20,7 +20,8 @@ def _published(entry) -> datetime:
 
 def fetch_feed(source: FeedSource, lookback_hours: int = 24, limit: int = 20) -> list[Article]:
     parsed = feedparser.parse(source.url)
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=lookback_hours)
+    now = datetime.now(timezone.utc)
+    cutoff = now - timedelta(hours=lookback_hours)
     articles: list[Article] = []
     for entry in parsed.entries[:limit]:
         url = entry.get("link", "").strip()
@@ -28,7 +29,10 @@ def fetch_feed(source: FeedSource, lookback_hours: int = 24, limit: int = 20) ->
         if not url or not title:
             continue
         published = _published(entry)
-        if published < cutoff:
+        # Some feeds occasionally publish a future timestamp because of
+        # timezone/publishing metadata errors. Never include future stories
+        # in a real-time lookback window.
+        if published > now or published < cutoff:
             continue
         articles.append(
             Article(
