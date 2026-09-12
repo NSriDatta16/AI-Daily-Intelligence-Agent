@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     smtp_password: str = ""
     email_from: str = ""
     email_to: str = ""
+    dashboard_url: str = "https://nsridatta16.github.io/AI-Daily-Intelligence-Agent/"
 
     whatsapp_enabled: bool = False
     twilio_account_sid: str = ""
