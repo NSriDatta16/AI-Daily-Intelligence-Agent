@@ -1,5 +1,67 @@
 [
   {
+    "generated_at": "2026-09-12T20:10:43.322241+00:00",
+    "lookback_hours": 24,
+    "article_count": 6,
+    "briefing": "# Daily AI Intelligence Briefing\n\n---\n\n### Major Development\n\n#### Anthropic and OpenAI Leadership Consider Plans to \"Pace\" Frontier AI\n* **What happened:** Anthropic CEO Dario Amodei has outlined a framework to \"pace the frontier\" of advanced AI development, echoing recent consensus with OpenAI CEO Sam Altman regarding controlled pacing for next-generation releases.\n* **Why it matters:** \n  * *Reported Facts:* Top frontier AI lab leaders are publicly discussing mechanisms to slow or structure the pace of frontier model deployment.\n  * *Implications:* Voluntary or coordinated pacing by dominant frontier labs could redefine commercial release schedules, shift competition toward efficiency and safety infrastructure, and establish new self-regulatory norms before formal policy mandates are enacted.\n* **Source:** [TechCrunch AI](https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/)\n\n---\n\n### Research & Infrastructure\n\n* **Tail-Aware Scheduling Cuts Agent Latency by Up to 3.5x:** Researchers introduced a turn-release scheduling policy for multi-turn agentic LLM workflows that decouples task readiness from execution release. Using a mean–Conditional Value-at-Risk (CVaR) objective to evaluate unfinished work under queue contention, the system reduced 95th-percentile (P95) workflow flow time by up to 3.50x on real software engineering execution traces.  \n  * **Source:** [arXiv](https://arxiv.org/abs/2609.10964)\n\n* **Agent Incident Registry (AIR) Formed to Track AI Failures:** A new open catalog, the Agent Incident Registry (AIR), systematically categorizes disclosed safety and security failures involving tool-using AI agents. All records underwent double-human review, labeling failure mechanisms, causal roles, and realized vs. demonstrated outcomes to support source-grounded security auditing.  \n  * **Source:** [arXiv](https://arxiv.org/abs/2609.11030)\n\n* **Benchmark Radar Launches Central Search Engine for AI Evaluations:** Researchers unveiled Benchmark Radar, a living catalog aggregating 1,283 benchmark source records and 12,916 score observations across 37 daily feeds. The platform provides public dashboards, benchmark saturation analyses, and Pareto frontier metrics comparing performance against measured resource usage.  \n  * **Source:** [arXiv](https://arxiv.org/abs/2609.11115)\n\n---\n\n### Industry & Capital\n\n* **Mecka AI Nears $500M Valuation in Sequoia-Led Deal:** Two-year-old startup Mecka AI is finalizing a funding round led by Sequoia Capital that values the company near $500M. The investment underscores escalating demand for specialized physical data to train robotic systems and embodiment models.  \n  * **Source:** [TechCrunch AI](https://techcrunch.com/2026/09/11/mecka-ai-nears-500m-valuation-in-sequoia-led-deal-amid-rush-for-robot-training-data/)\n\n* **Y Combinator Pushes US Labs to Distill Frontier AI Models:** Y Combinator CEO Garry Tan called on domestic open-weight AI developers to actively distill American proprietary frontier models. Tan urged the approach to ensure US-developed open-weight options remain competitive against rapidly growing Chinese open-weight releases.  \n  * **Source:** [TechCrunch AI](https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/)",
+    "articles": [
+      {
+        "title": "Benchmark Radar: A Living Database and Search Engine for AI Benchmarks and Evaluation",
+        "url": "https://arxiv.org/abs/2609.11115",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 36.978,
+        "summary": "arXiv:2609.11115v1 Announce Type: new \nAbstract: Benchmark researchers and developers of large language models (LLMs) and other AI systems need to find relevant evaluations, locate their benchmark datasets and code, and understand the settings behind reported scores. We present Benchmark Radar, a living database and search engine for retrieval and discovery of AI benchmarks, covering LLM evaluation, agentic and tool-use benchmarks, coding, reasoning, safety, and domain-specific evaluations. The system combines daily discovery of benchmark papers, repositories, datasets, and releases with a searchable benchmark catalog, mentions in model cards and technical reports, and score histories. It retains source identities and citations so readers can inspect candidate benchmarks and their evaluation evidence. Daily discovery draws on 37 sources: 13 direct connectors and 24 first-party research and engineering feeds. The catalog contains 1,283 source records drawn from 4 benchmark catalogs and 12,916 numeric observations on 790 records. We describe collection and retrieval, audit the full catalog, and examine benchmark saturation, adoption trends, and the limits of score comparisons. A worked example walks through a complete prior-art search, showing how to query the catalog and inspect benchmark evidence when designing a new evaluation. We release the web dashboard with a benchmark leaderboard, a Pareto frontier view of score against measured use, saturation and trend views, daily feeds, downloadable evidence, a command-line interface (CLI) for offline queries, and reproducible analysis."
+      },
+      {
+        "title": "Decoupling Readiness from Release for Tail-Aware Scheduling of Agentic LLM Workflows",
+        "url": "https://arxiv.org/abs/2609.10964",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 29.728,
+        "summary": "arXiv:2609.10964v1 Announce Type: new \nAbstract: Agentic LLM workflows consist of sequences of model turns interleaved with tool interactions, so their end-to-end completion time depends not only on inference speed but also on when ready turns are released. Most runtimes release each turn immediately upon readiness. Under contention, this eager release policy can accumulate released but unfinished work; once submitted, those turns can no longer be reordered by the workflow-level policy, increasing tail latency. We present a tail-risk-aware turn release scheduling method that jointly decides which ready turn to release next and how much released but unfinished work to maintain. The method uses a mean--Conditional Value-at-Risk (CVaR) objective to capture the evolving tail risk of unfinished workflows, incorporates online estimates of turn work when prioritizing ready turns, and adapts the released work budget to observed queue pressure. We evaluate the method using real agent execution traces from software engineering tasks across multiple LLMs and workflow arrival rates. The method performs comparably to eager release under light load and substantially reduces the P95 of workflow flow time under contention, achieving up to a \\(3.50\\times\\) speedup."
+      },
+      {
+        "title": "The Agent Incident Registry: Toward Preventing Repeated AI Agent Failures",
+        "url": "https://arxiv.org/abs/2609.11030",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 21.728,
+        "summary": "arXiv:2609.11030v1 Announce Type: new \nAbstract: AI agents increasingly act through tools and delegated authority, but general incident repositories rarely capture the mechanisms needed to compare public failures with agent-security evaluations. We present the Agent Incident Registry (AIR), a source-linked catalog containing \\N{} records of agent-related events disclosed from \\Yfirst{} through \\Ylast{}. Each record includes supporting evidence, a stable identifier, and missingness-aware labels for causal role, disclosure class, mechanism, and outcome. Among the \\Nprimary{} generative-system records in which the agent acted, \\Rprimary{} involved realized harm (\\Pprimary\\%). Realized outcomes concentrate in in-the-wild and safety-failure records, while responsible disclosures and research demonstrations are overwhelmingly demonstrated; the aggregate share therefore characterizes collection composition rather than deployment risk. After initial curation, a second human reviewer checked all \\N{} records and their existing labels for completeness and correctness. In a deployment-analogue audit, InjecAgent's \\NInjecAgentCases{} cases occupy three of AIR's twelve surfaces and are all attacker-triggered, whereas AIR contains \\Nsafety{} no-adversary safety failures. AIR supports source-grounded case retrieval and evaluation-scope auditing, not failure-rate or control-efficacy estimation."
+      },
+      {
+        "title": "Anthropic CEO outlines plan to slow AI development",
+        "url": "https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-12T19:34:44+00:00",
+        "importance_score": 8.676,
+        "summary": "Anthropic's Dario Amodei and OpenAI's Sam Altman seem to agree that it's time to \"pace the frontier.\" What would that actually look like?"
+      },
+      {
+        "title": "Y Combinator’s Garry Tan wants US open-weight AI labs to ‘distill’ frontier models, too",
+        "url": "https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-11T20:59:47+00:00",
+        "importance_score": 7.853,
+        "summary": "Tan wants smaller, American open-weight AI labs to use the same kind of training techniques on American frontier AI labs, giving the U.S. a more robust set of open-weight options that aren’t Chinese."
+      },
+      {
+        "title": "Mecka AI nears $500M valuation in Sequoia-led deal amid rush for robot training data",
+        "url": "https://techcrunch.com/2026/09/11/mecka-ai-nears-500m-valuation-in-sequoia-led-deal-amid-rush-for-robot-training-data/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-11T22:58:17+00:00",
+        "importance_score": 6.1,
+        "summary": "The round for the two-year-old startup is coming together months after Mecka announced its Series A."
+      }
+    ]
+  },
+  {
     "generated_at": "2026-09-12T19:43:34.452749+00:00",
     "lookback_hours": 24,
     "article_count": 7,
