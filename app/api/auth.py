@@ -15,14 +15,14 @@ def _env(name: str, default: str = "") -> str:
     return os.getenv(name, default).strip()
 
 
-def _enabled() -> bool:
+def enabled() -> bool:
     return _env("AUTH_ENABLED", "false").lower() == "true"
 
 
 def _configured() -> bool:
     return all(
         [
-            _enabled(),
+            enabled(),
             _env("ENTRA_TENANT_ID"),
             _env("ENTRA_CLIENT_ID"),
             _env("ENTRA_CLIENT_SECRET"),
@@ -105,7 +105,7 @@ def current_user(request: Request) -> dict[str, Any] | None:
 
 
 def require_user(request: Request) -> dict[str, Any]:
-    if not _enabled():
+    if not enabled():
         return {"sub": "local", "name": "Local User", "email": ""}
     user = current_user(request)
     if not user:
