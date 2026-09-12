@@ -140,9 +140,17 @@ def run() -> str:
 
     subject = f"AI Daily Intelligence — {now.astimezone().strftime('%Y-%m-%d')}"
     if settings.email_enabled:
-        send_email(subject, briefing)
+        try:
+            send_email(subject, briefing)
+        except Exception as exc:
+            # Notifications must not prevent the dashboard from publishing.
+            print(f"WARNING: email notification failed: {exc}")
     if settings.whatsapp_enabled:
-        send_whatsapp(briefing)
+        try:
+            send_whatsapp(briefing)
+        except Exception as exc:
+            # Notifications must not prevent the dashboard from publishing.
+            print(f"WARNING: WhatsApp notification failed: {exc}")
 
     print(
         f"published articles={len(articles)} stored_articles={len(all_articles)} "
