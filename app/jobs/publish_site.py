@@ -9,7 +9,15 @@ from app.notifications.email import send_email
 from app.notifications.whatsapp import send_whatsapp
 from app.pipeline.process import deduplicate, rank
 from app.sources.feeds import SOURCES
-from app.storage.database import init_db, save_articles, save_briefing
+from app.storage.analytics import dashboard_stats, repeated_topics
+from app.storage.database import article_history, init_db, recent_briefings, save_articles, save_briefing
+
+
+def _write_json(site: Path, filename: str, payload: dict | list) -> None:
+    (site / filename).write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
 
 
 def run() -> str:
@@ -24,6 +32,9 @@ def run() -> str:
     now = datetime.now(timezone.utc)
     generated_at = now.isoformat()
     save_briefing(generated_at, settings.lookback_hours, briefing, articles)
+
+    site = Path("site")
+    site.mkdir(exist_ok=True)
 
     payload = {
         "generated_at": generated_at,
@@ -44,9 +55,13 @@ def run() -> str:
         ],
     }
 
-    site = Path("site")
-    site.mkdir(exist_ok=True)
-    (site / "briefing.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    stats = dashboard_stats()
+    stats["repeated_topics"] = repeated_topics()
+
+    _write_json(site, "briefing.json", payload)
+    _write_json(site, "analytics.json", stats)
+    _write_json(site, "history.json", {"briefings": recent_briefings(30)})
+    _write_json(site, "articles.json", {"articles": article_history(200)})
 
     subject = f"AI Daily Intelligence — {now.astimezone().strftime('%Y-%m-%d')}"
     if settings.email_enabled:
@@ -54,7 +69,7 @@ def run() -> str:
     if settings.whatsapp_enabled:
         send_whatsapp(briefing)
 
-    print(f"published articles={len(articles)} email={settings.email_enabled} whatsapp={settings.whatsapp_enabled}")
+    print(f"published articles={len(articles)} briefings={stats['total_briefings']} email={settings.email_enabled} whatsapp={settings.whatsapp_enabled}")
     return briefing
 
 
