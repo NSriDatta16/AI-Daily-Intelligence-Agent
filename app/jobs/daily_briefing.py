@@ -17,14 +17,18 @@ def run() -> str:
 
     briefing = BriefingAgent().generate(articles)
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    subject = f"AI Daily Intelligence — {timestamp}"
+    subject = f"My Daily AI Updates — {timestamp}"
 
     if settings.email_enabled:
-        send_email(subject, briefing)
+        send_email(subject, briefing, settings.dashboard_url)
     if settings.whatsapp_enabled:
         send_whatsapp(briefing)
 
-    print(f"briefing_complete articles={len(articles)} email={settings.email_enabled} whatsapp={settings.whatsapp_enabled}")
+    print(
+        f"briefing_complete articles={len(articles)} "
+        f"email={settings.email_enabled} whatsapp={settings.whatsapp_enabled} "
+        f"dashboard={settings.dashboard_url}"
+    )
     return briefing
 
 
