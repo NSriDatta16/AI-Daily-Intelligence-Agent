@@ -25,7 +25,11 @@ class Settings(BaseSettings):
     max_articles: int = 60
     top_stories: int = 8
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_ignore_empty=True,
+        extra="ignore",
+    )
 
 
 settings = Settings()
