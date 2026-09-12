@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 
 from app.agent.summarizer import BriefingAgent
-from app.api.auth import callback, cookie_secure, current_user, login, logout, require_user, session_secret
+from app.api.auth import callback, cookie_secure, current_user, enabled, login, logout, require_user, session_secret
 from app.core.config import settings
 from app.ingestion.rss import collect
 from app.pipeline.process import deduplicate, rank
@@ -19,9 +19,6 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 STATIC_DIR = BASE_DIR / "app" / "static"
 
 app = FastAPI(title="AI Daily Intelligence Agent", version="0.5.0")
-
-# The middleware is inert when AUTH_ENABLED=false. When enabled, it signs the
-# short-lived browser session cookie; OAuth tokens are never exposed to the UI.
 app.add_middleware(
     SessionMiddleware,
     secret_key=session_secret() or "local-development-only-change-me",
@@ -36,7 +33,7 @@ init_db()
 
 @app.get("/", name="root")
 def root(request: Request):
-    if settings.auth_enabled and not current_user(request):
+    if enabled() and not current_user(request):
         return RedirectResponse(url="/auth/login", status_code=303)
     return FileResponse(STATIC_DIR / "index.html")
 
@@ -63,7 +60,7 @@ def me(user: dict = Depends(require_user)) -> dict:
 
 @app.get("/health")
 def health() -> dict:
-    return {"status": "healthy", "database": "connected", "authentication": settings.auth_enabled}
+    return {"status": "healthy", "database": "connected", "authentication": enabled()}
 
 
 @app.get("/preview")
