@@ -1,8 +1,6 @@
 name: Daily AI Intelligence
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: '0 9 * * *'
