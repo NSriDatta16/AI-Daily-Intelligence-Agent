@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-12T20:23:16.568356+00:00",
+  "generated_at": "2026-09-12T20:59:28.838758+00:00",
   "total_articles": 8,
-  "total_briefings": 3,
+  "total_briefings": 4,
   "sources": [
     {
       "source": "TechCrunch AI",
@@ -37,7 +37,7 @@
       "source": "arXiv AI",
       "category": "research",
       "published_at": "2026-09-12T00:00:00-04:00",
-      "importance_score": 36.952,
+      "importance_score": 36.877,
       "summary": "arXiv:2609.11115v1 Announce Type: new \nAbstract: Benchmark researchers and developers of large language models (LLMs) and other AI systems need to find relevant evaluations, locate their benchmark datasets and code, and understand the settings behind reported scores. We present Benchmark Radar, a living database and search engine for retrieval and discovery of AI benchmarks, covering LLM evaluation, agentic and tool-use benchmarks, coding, reasoning, safety, and domain-specific evaluations. The system combines daily discovery of benchmark papers, repositories, datasets, and releases with a searchable benchmark catalog, mentions in model cards and technical reports, and score histories. It retains source identities and citations so readers can inspect candidate benchmarks and their evaluation evidence. Daily discovery draws on 37 sources: 13 direct connectors and 24 first-party research and engineering feeds. The catalog contains 1,283 source records drawn from 4 benchmark catalogs and 12,916 numeric observations on 790 records. We describe collection and retrieval, audit the full catalog, and examine benchmark saturation, adoption trends, and the limits of score comparisons. A worked example walks through a complete prior-art search, showing how to query the catalog and inspect benchmark evidence when designing a new evaluation. We release the web dashboard with a benchmark leaderboard, a Pareto frontier view of score against measured use, saturation and trend views, daily feeds, downloadable evidence, a command-line interface (CLI) for offline queries, and reproducible analysis."
     },
     {
@@ -46,7 +46,7 @@
       "source": "arXiv AI",
       "category": "research",
       "published_at": "2026-09-12T00:00:00-04:00",
-      "importance_score": 29.702,
+      "importance_score": 29.627,
       "summary": "arXiv:2609.10964v1 Announce Type: new \nAbstract: Agentic LLM workflows consist of sequences of model turns interleaved with tool interactions, so their end-to-end completion time depends not only on inference speed but also on when ready turns are released. Most runtimes release each turn immediately upon readiness. Under contention, this eager release policy can accumulate released but unfinished work; once submitted, those turns can no longer be reordered by the workflow-level policy, increasing tail latency. We present a tail-risk-aware turn release scheduling method that jointly decides which ready turn to release next and how much released but unfinished work to maintain. The method uses a mean--Conditional Value-at-Risk (CVaR) objective to capture the evolving tail risk of unfinished workflows, incorporates online estimates of turn work when prioritizing ready turns, and adapts the released work budget to observed queue pressure. We evaluate the method using real agent execution traces from software engineering tasks across multiple LLMs and workflow arrival rates. The method performs comparably to eager release under light load and substantially reduces the P95 of workflow flow time under contention, achieving up to a \\(3.50\\times\\) speedup."
     },
     {
@@ -55,7 +55,7 @@
       "source": "arXiv AI",
       "category": "research",
       "published_at": "2026-09-12T00:00:00-04:00",
-      "importance_score": 21.702,
+      "importance_score": 21.627,
       "summary": "arXiv:2609.11030v1 Announce Type: new \nAbstract: AI agents increasingly act through tools and delegated authority, but general incident repositories rarely capture the mechanisms needed to compare public failures with agent-security evaluations. We present the Agent Incident Registry (AIR), a source-linked catalog containing \\N{} records of agent-related events disclosed from \\Yfirst{} through \\Ylast{}. Each record includes supporting evidence, a stable identifier, and missingness-aware labels for causal role, disclosure class, mechanism, and outcome. Among the \\Nprimary{} generative-system records in which the agent acted, \\Rprimary{} involved realized harm (\\Pprimary\\%). Realized outcomes concentrate in in-the-wild and safety-failure records, while responsible disclosures and research demonstrations are overwhelmingly demonstrated; the aggregate share therefore characterizes collection composition rather than deployment risk. After initial curation, a second human reviewer checked all \\N{} records and their existing labels for completeness and correctness. In a deployment-analogue audit, InjecAgent's \\NInjecAgentCases{} cases occupy three of AIR's twelve surfaces and are all attacker-triggered, whereas AIR contains \\Nsafety{} no-adversary safety failures. AIR supports source-grounded case retrieval and evaluation-scope auditing, not failure-rate or control-efficacy estimation."
     },
     {
@@ -73,7 +73,7 @@
       "source": "TechCrunch AI",
       "category": "news",
       "published_at": "2026-09-12T19:34:44+00:00",
-      "importance_score": 8.649,
+      "importance_score": 8.574,
       "summary": "Anthropic's Dario Amodei and OpenAI's Sam Altman seem to agree that it's time to \"pace the frontier.\" What would that actually look like?"
     },
     {
@@ -82,7 +82,7 @@
       "source": "TechCrunch AI",
       "category": "news",
       "published_at": "2026-09-11T20:59:47+00:00",
-      "importance_score": 7.827,
+      "importance_score": 7.751,
       "summary": "Tan wants smaller, American open-weight AI labs to use the same kind of training techniques on American frontier AI labs, giving the U.S. a more robust set of open-weight options that aren’t Chinese."
     },
     {
@@ -91,7 +91,7 @@
       "source": "TechCrunch AI",
       "category": "news",
       "published_at": "2026-09-12T20:19:16+00:00",
-      "importance_score": 7.742,
+      "importance_score": 7.667,
       "summary": "While OpenAI has filed confidentially for an IPO, the company will not be going public this year, according to CEO Sam Altman."
     },
     {
@@ -106,11 +106,11 @@
   ],
   "repeated_topics": [
     {
-      "topic": "perplexity",
+      "topic": "astra",
       "mentions": 1
     },
     {
-      "topic": "astra",
+      "topic": "perplexity",
       "mentions": 1
     },
     {
@@ -122,6 +122,10 @@
       "mentions": 1
     },
     {
+      "topic": "advised’",
+      "mentions": 1
+    },
+    {
       "topic": "public",
       "mentions": 1
     },
@@ -130,7 +134,7 @@
       "mentions": 1
     },
     {
-      "topic": "advised’",
+      "topic": "altman",
       "mentions": 1
     },
     {
@@ -138,15 +142,7 @@
       "mentions": 1
     },
     {
-      "topic": "altman",
-      "mentions": 1
-    },
-    {
       "topic": "development",
-      "mentions": 1
-    },
-    {
-      "topic": "outlines",
       "mentions": 1
     },
     {
@@ -154,7 +150,11 @@
       "mentions": 1
     },
     {
-      "topic": "benchmark",
+      "topic": "outlines",
+      "mentions": 1
+    },
+    {
+      "topic": "benchmarks",
       "mentions": 1
     },
     {
@@ -162,7 +162,7 @@
       "mentions": 1
     },
     {
-      "topic": "benchmarks",
+      "topic": "benchmark",
       "mentions": 1
     }
   ]

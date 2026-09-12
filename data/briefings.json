@@ -1,5 +1,67 @@
 [
   {
+    "generated_at": "2026-09-12T20:59:28.816271+00:00",
+    "lookback_hours": 24,
+    "article_count": 6,
+    "briefing": "# Daily AI Intelligence Briefing\n\n---\n\n### Major Developments\n\n#### OpenAI Delays IPO Plans Until After 2026\n* **What happened:** OpenAI CEO Sam Altman stated that going public in 2026 would be \"ill-advised,\" confirming the company will not execute an IPO this year despite having filed confidentially.\n* **Why it matters:** *(Implication)* Staying private gives OpenAI operational flexibility to manage massive capital expenditure and ongoing restructuring without facing the quarter-to-quarter earnings volatility and strict transparency demands of public markets.\n* **Source:** [TechCrunch AI](https://techcrunch.com/2026/09/12/openais-sam-altman-says-it-would-be-ill-advised-to-go-public-in-2026/)\n\n#### Frontier AI Leaders Weigh Pacing Development Amid Push for U.S. Model Distillation\n* **What happened:** Anthropic CEO Dario Amodei and OpenAI CEO Sam Altman have signaled alignment on plans to \"pace the frontier\" of AI development. Concurrently, Y Combinator CEO Garry Tan called for American open-weight AI labs to distill frontier models built by U.S. companies to ensure domestic open alternatives keep pace with Chinese open-weight developments.\n* **Why it matters:** The discussion highlights a potential shift in strategy among top labs toward managed frontier scaling, while open-source advocates urge aggressive distillation to prevent overseas open-weight models from dominating the ecosystem.\n* **Source:** [TechCrunch AI (Pacing)](https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/) | [TechCrunch AI (Distillation)](https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/)\n\n---\n\n### Research & Engineering\n\n* **Tail-Aware Scheduling Cuts Agent Latency:** A new scheduling framework for multi-turn agentic workflows decouples turn readiness from execution release. By prioritizing turns using a mean–Conditional Value-at-Risk (CVaR) objective to measure evolving tail risk under hardware contention, the method achieves up to a **3.50× speedup** in P95 workflow flow time on software engineering tasks. ([arXiv](https://arxiv.org/abs/2609.10964))\n* **Benchmark Radar Engine Launched for AI Evaluations:** Researchers released *Benchmark Radar*, a living database and search engine designed to discover, track, and audit AI evaluation benchmarks. The catalog indexes **1,283 source records** and **12,916 numeric observations** across 790 benchmarks, pulling daily updates from 37 sources (13 direct connectors and 24 research feeds) to track benchmark saturation and Pareto performance metrics. ([arXiv](https://arxiv.org/abs/2609.11115))\n* **Agent Incident Registry (AIR) Catalogues Real-World Failures:** The newly established Agent Incident Registry provides a source-linked, audited database of public AI agent security failures, realized harms, and safety incidents. An audit within the dataset revealed that synthetic security benchmarks (e.g., InjecAgent) cover only a narrow subset of real-world agent failure modes, underscoring gaps between current safety evals and deployed behavior. ([arXiv](https://arxiv.org/abs/2609.11030))\n\n---\n\n### Industry & Open Source\n\n* **U.S. Open-Weight Strategy Shift:** Y Combinator's Garry Tan is advocating for American open-source developers to systematically distill frontier models produced by U.S. frontier labs. The goal is to establish a strong ecosystem of domestic open-weight models to compete directly with Chinese open-weight releases. ([TechCrunch AI](https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/))\n\n---\n\n### What To Watch\n\n* **Frontier \"Pacing\" Commitments:** Watch for concrete self-regulatory frameworks or joint commitments from Anthropic and OpenAI explaining how \"pacing the frontier\" will affect model release schedules and safety evaluations.\n* **Agent Runtime Upgrades:** Infrastructure teams should monitor whether production agent orchestrators adopt CVaR-based turn scheduling to control severe P95 tail latencies in multi-tool agent deployment.",
+    "articles": [
+      {
+        "title": "Benchmark Radar: A Living Database and Search Engine for AI Benchmarks and Evaluation",
+        "url": "https://arxiv.org/abs/2609.11115",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 36.877,
+        "summary": "arXiv:2609.11115v1 Announce Type: new \nAbstract: Benchmark researchers and developers of large language models (LLMs) and other AI systems need to find relevant evaluations, locate their benchmark datasets and code, and understand the settings behind reported scores. We present Benchmark Radar, a living database and search engine for retrieval and discovery of AI benchmarks, covering LLM evaluation, agentic and tool-use benchmarks, coding, reasoning, safety, and domain-specific evaluations. The system combines daily discovery of benchmark papers, repositories, datasets, and releases with a searchable benchmark catalog, mentions in model cards and technical reports, and score histories. It retains source identities and citations so readers can inspect candidate benchmarks and their evaluation evidence. Daily discovery draws on 37 sources: 13 direct connectors and 24 first-party research and engineering feeds. The catalog contains 1,283 source records drawn from 4 benchmark catalogs and 12,916 numeric observations on 790 records. We describe collection and retrieval, audit the full catalog, and examine benchmark saturation, adoption trends, and the limits of score comparisons. A worked example walks through a complete prior-art search, showing how to query the catalog and inspect benchmark evidence when designing a new evaluation. We release the web dashboard with a benchmark leaderboard, a Pareto frontier view of score against measured use, saturation and trend views, daily feeds, downloadable evidence, a command-line interface (CLI) for offline queries, and reproducible analysis."
+      },
+      {
+        "title": "Decoupling Readiness from Release for Tail-Aware Scheduling of Agentic LLM Workflows",
+        "url": "https://arxiv.org/abs/2609.10964",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 29.627,
+        "summary": "arXiv:2609.10964v1 Announce Type: new \nAbstract: Agentic LLM workflows consist of sequences of model turns interleaved with tool interactions, so their end-to-end completion time depends not only on inference speed but also on when ready turns are released. Most runtimes release each turn immediately upon readiness. Under contention, this eager release policy can accumulate released but unfinished work; once submitted, those turns can no longer be reordered by the workflow-level policy, increasing tail latency. We present a tail-risk-aware turn release scheduling method that jointly decides which ready turn to release next and how much released but unfinished work to maintain. The method uses a mean--Conditional Value-at-Risk (CVaR) objective to capture the evolving tail risk of unfinished workflows, incorporates online estimates of turn work when prioritizing ready turns, and adapts the released work budget to observed queue pressure. We evaluate the method using real agent execution traces from software engineering tasks across multiple LLMs and workflow arrival rates. The method performs comparably to eager release under light load and substantially reduces the P95 of workflow flow time under contention, achieving up to a \\(3.50\\times\\) speedup."
+      },
+      {
+        "title": "The Agent Incident Registry: Toward Preventing Repeated AI Agent Failures",
+        "url": "https://arxiv.org/abs/2609.11030",
+        "source": "arXiv AI",
+        "category": "research",
+        "published_at": "2026-09-12T00:00:00-04:00",
+        "importance_score": 21.627,
+        "summary": "arXiv:2609.11030v1 Announce Type: new \nAbstract: AI agents increasingly act through tools and delegated authority, but general incident repositories rarely capture the mechanisms needed to compare public failures with agent-security evaluations. We present the Agent Incident Registry (AIR), a source-linked catalog containing \\N{} records of agent-related events disclosed from \\Yfirst{} through \\Ylast{}. Each record includes supporting evidence, a stable identifier, and missingness-aware labels for causal role, disclosure class, mechanism, and outcome. Among the \\Nprimary{} generative-system records in which the agent acted, \\Rprimary{} involved realized harm (\\Pprimary\\%). Realized outcomes concentrate in in-the-wild and safety-failure records, while responsible disclosures and research demonstrations are overwhelmingly demonstrated; the aggregate share therefore characterizes collection composition rather than deployment risk. After initial curation, a second human reviewer checked all \\N{} records and their existing labels for completeness and correctness. In a deployment-analogue audit, InjecAgent's \\NInjecAgentCases{} cases occupy three of AIR's twelve surfaces and are all attacker-triggered, whereas AIR contains \\Nsafety{} no-adversary safety failures. AIR supports source-grounded case retrieval and evaluation-scope auditing, not failure-rate or control-efficacy estimation."
+      },
+      {
+        "title": "Anthropic CEO outlines plan to slow AI development",
+        "url": "https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-12T19:34:44+00:00",
+        "importance_score": 8.574,
+        "summary": "Anthropic's Dario Amodei and OpenAI's Sam Altman seem to agree that it's time to \"pace the frontier.\" What would that actually look like?"
+      },
+      {
+        "title": "Y Combinator’s Garry Tan wants US open-weight AI labs to ‘distill’ frontier models, too",
+        "url": "https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-11T20:59:47+00:00",
+        "importance_score": 7.751,
+        "summary": "Tan wants smaller, American open-weight AI labs to use the same kind of training techniques on American frontier AI labs, giving the U.S. a more robust set of open-weight options that aren’t Chinese."
+      },
+      {
+        "title": "OpenAI’s Sam Altman says it would be ‘ill-advised’ to go public in 2026",
+        "url": "https://techcrunch.com/2026/09/12/openais-sam-altman-says-it-would-be-ill-advised-to-go-public-in-2026/",
+        "source": "TechCrunch AI",
+        "category": "news",
+        "published_at": "2026-09-12T20:19:16+00:00",
+        "importance_score": 7.667,
+        "summary": "While OpenAI has filed confidentially for an IPO, the company will not be going public this year, according to CEO Sam Altman."
+      }
+    ]
+  },
+  {
     "generated_at": "2026-09-12T20:23:16.564789+00:00",
     "lookback_hours": 24,
     "article_count": 6,
