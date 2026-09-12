@@ -9,18 +9,24 @@ from app.notifications.email import send_email
 from app.notifications.whatsapp import send_whatsapp
 from app.pipeline.process import deduplicate, rank
 from app.sources.feeds import SOURCES
+from app.storage.database import init_db, save_articles, save_briefing
 
 
 def run() -> str:
+    init_db()
     articles = collect(SOURCES, settings.lookback_hours, settings.max_articles)
     articles = rank(deduplicate(articles), settings.top_stories)
     if not articles:
         raise RuntimeError("No recent AI articles were collected")
 
+    save_articles(articles, {a.url: a.importance_score for a in articles})
     briefing = BriefingAgent().generate(articles)
     now = datetime.now(timezone.utc)
+    generated_at = now.isoformat()
+    save_briefing(generated_at, settings.lookback_hours, briefing, articles)
+
     payload = {
-        "generated_at": now.isoformat(),
+        "generated_at": generated_at,
         "lookback_hours": settings.lookback_hours,
         "article_count": len(articles),
         "briefing": briefing,
