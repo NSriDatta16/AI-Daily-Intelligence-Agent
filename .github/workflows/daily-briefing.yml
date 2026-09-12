@@ -28,8 +28,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Generate briefing and dashboard data
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: gpt-5-mini
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: gemini-2.5-flash
         run: PYTHONPATH=. python -m app.jobs.publish_site
       - name: Build Pages site
         run: cp web/index.html site/index.html
