@@ -1,68 +1,78 @@
 # AI Daily Intelligence Agent
 
-An end-to-end production-oriented agent that collects the latest AI developments, removes duplicates, ranks important stories, summarizes them with an LLM, and delivers a daily briefing by email and/or WhatsApp.
+An end-to-end AI intelligence agent that collects important AI developments from the previous 24 hours, removes duplicates, ranks stories, synthesizes a daily briefing with Gemini, persists historical intelligence, and publishes a searchable dashboard on GitHub Pages.
 
-## Architecture
+## Live architecture
 
 ```text
-RSS / APIs / trusted AI sources
-        |
-        v
-   Ingestion layer
-        |
-        v
- Raw article normalization
-        |
-        v
- URL/content deduplication
-        |
-        v
- Relevance + ranking
-        |
-        v
- LLM synthesis
-        |
-        v
- Daily briefing
-    /        \
- Email      WhatsApp
-        |
-        v
- Run metrics + logs
+Official / trusted AI RSS sources
+            |
+            v
+       RSS ingestion
+            |
+            v
+   Normalize + deduplicate
+            |
+            v
+      Relevance ranking
+            |
+            v
+      Gemini synthesis
+            |
+      +-----+------+
+      |            |
+      v            v
+  Email/WhatsApp  JSON history
+                     |
+                     v
+               GitHub Pages
+                     |
+                     v
+            Intelligence dashboard
 ```
 
-## Initial sources
+## What it does
 
-- OpenAI News
-- Google AI Blog
-- Microsoft Research
-- Hugging Face Blog
-- Meta AI
-- NVIDIA AI Blog
-- arXiv AI/ML recent papers
-- GitHub Trending AI/ML repositories
+- Collects AI news, research, model releases and open-source developments.
+- Limits the intelligence window to the latest 24 hours by default.
+- Deduplicates repeated URLs and near-identical headlines.
+- Scores stories using relevance, impact, source authority and freshness.
+- Uses Gemini to produce an evidence-grounded daily briefing.
+- Stores up to 30 briefing snapshots and 500 recent articles in repository-backed JSON history.
+- Publishes a static dashboard with search, category/source filters, story scores, trending topics and briefing history.
+- Optionally sends the briefing by SMTP email and Twilio WhatsApp.
 
-The source layer is deliberately modular so new RSS feeds, APIs, and scrapers can be added without changing the agent pipeline.
+## Dashboard
+
+GitHub Pages is used as the hosting layer. The dashboard is completely static: GitHub Actions generates the data files and deploys them with the site. GitHub Pages supports custom GitHub Actions workflows for this deployment model. citeturn0search0
+
+The site does not expose the Gemini API key. The key is used only inside the GitHub Actions job through `GEMINI_API_KEY`.
 
 ## Stack
 
 - Python 3.11
-- FastAPI
-- feedparser / requests
-- BeautifulSoup
-- OpenAI API
-- SQLite locally, PostgreSQL in production
-- Docker
-- GitHub Actions
-- Azure Container Apps
+- FastAPI for the local/API version
+- feedparser / requests / BeautifulSoup
+- Google Gemini API via `google-genai`
+- SQLite for local persistence
+- Repository-backed JSON for durable GitHub Pages history
+- GitHub Actions for daily orchestration
+- GitHub Pages for static hosting
 - SMTP email delivery
 - Twilio WhatsApp delivery
+- Docker for local/containerized execution
+
+## Automation
+
+The daily intelligence workflow runs at **9:00 AM America/Toronto** and can also be started manually from GitHub Actions. Normal code pushes do not trigger the Gemini briefing workflow, preventing unnecessary model calls and notification noise.
+
+The workflow commits the generated historical JSON back to the repository using `GITHUB_TOKEN`. GitHub documents that pushes made with `GITHUB_TOKEN` do not recursively start another workflow run. citeturn1search0
 
 ## Local development
 
 ```bash
 python -m venv .venv
-# Windows: .venv\Scripts\activate
+# Windows: .venv\\Scripts\\activate
 # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
@@ -71,8 +81,19 @@ uvicorn app.api.main:app --reload --port 8000
 
 Health check: `http://localhost:8000/health`
 
-Run a briefing manually:
+Run the daily pipeline locally:
 
 ```bash
-python -m app.jobs.daily_briefing
+PYTHONPATH=. python -m app.jobs.publish_site
+```
+
+## Optional notifications
+
+Email and WhatsApp are disabled by default. Enable them through environment variables only after configuring the required SMTP or Twilio credentials. Never commit credentials to the repository.
+
+## Tests
+
+```bash
+pip install -r requirements-dev.txt
+PYTHONPATH=. pytest -q
 ```
