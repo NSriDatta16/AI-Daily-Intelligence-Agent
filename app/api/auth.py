@@ -1,25 +1,32 @@
 from __future__ import annotations
 
+import os
 from typing import Any
 
 from authlib.integrations.starlette_client import OAuth
 from fastapi import HTTPException, Request
 from fastapi.responses import RedirectResponse
 
-from app.core.config import settings
-
 
 oauth = OAuth()
+
+
+def _env(name: str, default: str = "") -> str:
+    return os.getenv(name, default).strip()
+
+
+def _enabled() -> bool:
+    return _env("AUTH_ENABLED", "false").lower() == "true"
 
 
 def _configured() -> bool:
     return all(
         [
-            settings.auth_enabled,
-            settings.entra_tenant_id,
-            settings.entra_client_id,
-            settings.entra_client_secret,
-            settings.auth_session_secret,
+            _enabled(),
+            _env("ENTRA_TENANT_ID"),
+            _env("ENTRA_CLIENT_ID"),
+            _env("ENTRA_CLIENT_SECRET"),
+            _env("AUTH_SESSION_SECRET"),
         ]
     )
 
@@ -32,20 +39,28 @@ def _client():
         )
     return oauth.register(
         name="entra",
-        client_id=settings.entra_client_id,
-        client_secret=settings.entra_client_secret,
+        client_id=_env("ENTRA_CLIENT_ID"),
+        client_secret=_env("ENTRA_CLIENT_SECRET"),
         server_metadata_url=(
-            f"https://login.microsoftonline.com/{settings.entra_tenant_id}"
+            f"https://login.microsoftonline.com/{_env('ENTRA_TENANT_ID')}"
             "/v2.0/.well-known/openid-configuration"
         ),
         client_kwargs={"scope": "openid profile email"},
     )
 
 
+def session_secret() -> str:
+    return _env("AUTH_SESSION_SECRET")
+
+
+def cookie_secure() -> bool:
+    return _env("AUTH_COOKIE_SECURE", "true").lower() == "true"
+
+
 def _allowed(user: dict[str, Any]) -> bool:
     allowed = {
         value.strip().lower()
-        for value in settings.auth_allowed_emails.split(",")
+        for value in _env("AUTH_ALLOWED_EMAILS").split(",")
         if value.strip()
     }
     if not allowed:
@@ -56,7 +71,7 @@ def _allowed(user: dict[str, Any]) -> bool:
 
 async def login(request: Request) -> RedirectResponse:
     client = _client()
-    redirect_uri = settings.auth_redirect_uri or str(request.url_for("auth_callback"))
+    redirect_uri = _env("AUTH_REDIRECT_URI") or str(request.url_for("auth_callback"))
     return await client.authorize_redirect(request, redirect_uri)
 
 
@@ -90,7 +105,7 @@ def current_user(request: Request) -> dict[str, Any] | None:
 
 
 def require_user(request: Request) -> dict[str, Any]:
-    if not settings.auth_enabled:
+    if not _enabled():
         return {"sub": "local", "name": "Local User", "email": ""}
     user = current_user(request)
     if not user:
