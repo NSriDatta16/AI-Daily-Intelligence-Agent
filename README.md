@@ -64,7 +64,3 @@ The site does not expose the Gemini API key. The key is used only inside the Git
 - SMTP email delivery
 - Twilio WhatsApp delivery
 - Docker for local/containerized execution
-```bash
-pip install -r requirements-dev.txt
-PYTHONPATH=. pytest -q
-```
