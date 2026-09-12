@@ -31,6 +31,7 @@ def run() -> str:
                 "source": a.source,
                 "category": a.category,
                 "published_at": a.published_at.isoformat(),
+                "importance_score": a.importance_score,
                 "summary": a.summary,
             }
             for a in articles
