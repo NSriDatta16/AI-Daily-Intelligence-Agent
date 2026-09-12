@@ -32,8 +32,8 @@ class BriefingAgent:
             "Do not invent facts. Use only supplied information.\n\n"
             + json.dumps(payload, ensure_ascii=False)
         )
-        response = self.client.models.generate_content(
+        interaction = self.client.interactions.create(
             model=settings.gemini_model,
-            contents=prompt,
+            input=prompt,
         )
-        return (response.text or "").strip()
+        return (interaction.output_text or "").strip()
