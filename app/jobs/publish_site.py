@@ -62,7 +62,7 @@ def _merge_articles(current: list[dict]) -> list[dict]:
     if not isinstance(existing, list):
         existing = []
     by_url: dict[str, dict] = {}
-    for item in [*current, *existing]:
+    for item in [*existing, *current]:
         url = str(item.get("url", "")).strip().lower()
         if url:
             by_url[url] = item
