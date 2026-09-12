@@ -25,7 +25,13 @@ def send_email(subject: str, body: str, dashboard_url: str | None = None) -> Non
     )
     message.attach(MIMEText(email_body, "plain", "utf-8"))
 
-    with smtplib.SMTP(settings.smtp_host, settings.smtp_port) as server:
-        server.starttls()
-        server.login(settings.smtp_username, settings.smtp_password)
-        server.sendmail(settings.email_from, [settings.email_to], message.as_string())
+    try:
+        with smtplib.SMTP(settings.smtp_host, settings.smtp_port) as server:
+            server.starttls()
+            server.login(settings.smtp_username, settings.smtp_password)
+            server.sendmail(settings.email_from, [settings.email_to], message.as_string())
+    except smtplib.SMTPAuthenticationError as exc:
+        raise RuntimeError(
+            "Gmail SMTP authentication failed. If this is a Gmail account, use a "
+            "Google App Password (not the normal account password) with 2-Step Verification enabled."
+        ) from exc
