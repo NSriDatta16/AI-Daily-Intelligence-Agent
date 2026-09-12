@@ -29,19 +29,7 @@ jobs:
       - name: Generate briefing and dashboard data
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
-          EMAIL_ENABLED: ${{ vars.EMAIL_ENABLED }}
-          SMTP_HOST: ${{ vars.SMTP_HOST }}
-          SMTP_PORT: ${{ vars.SMTP_PORT }}
-          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          EMAIL_FROM: ${{ vars.EMAIL_FROM }}
-          EMAIL_TO: ${{ vars.EMAIL_TO }}
-          WHATSAPP_ENABLED: ${{ vars.WHATSAPP_ENABLED }}
-          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-          TWILIO_WHATSAPP_FROM: ${{ vars.TWILIO_WHATSAPP_FROM }}
-          WHATSAPP_TO: ${{ vars.WHATSAPP_TO }}
+          OPENAI_MODEL: gpt-5-mini
         run: PYTHONPATH=. python -m app.jobs.publish_site
       - name: Build Pages site
         run: cp web/index.html site/index.html
