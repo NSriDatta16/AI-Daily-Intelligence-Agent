@@ -11,7 +11,7 @@ permissions:
   pages: write
   id-token: write
 
-environment:
+env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 concurrency:
@@ -51,6 +51,4 @@ jobs:
           path: site
       - name: Deploy Pages
         id: deployment
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: actions/deploy-pages@v5
