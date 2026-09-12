@@ -71,6 +71,16 @@ The daily intelligence workflow runs at **9:00 AM America/Toronto** and can also
 
 The workflow commits the generated historical JSON back to the repository using `GITHUB_TOKEN`. GitHub's workflow model prevents events created with `GITHUB_TOKEN` from recursively starting another workflow run.
 
+## Optional email delivery
+
+Email is disabled by default. To enable the daily email, configure these GitHub repository settings:
+
+- **Variable:** `EMAIL_ENABLED=true`
+- **Secrets:** `SMTP_USERNAME`, `SMTP_PASSWORD`, `EMAIL_FROM`, `EMAIL_TO`
+- **Optional variables:** `SMTP_HOST` (defaults to `smtp.gmail.com`) and `SMTP_PORT` (defaults to `587`)
+
+The email contains the generated briefing and a direct link to the dashboard. For Gmail, use an App Password rather than your normal account password.
+
 ## Local development
 
 ```bash
