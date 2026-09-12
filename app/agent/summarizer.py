@@ -1,6 +1,6 @@
 import json
 
-from openai import OpenAI
+from google import genai
 
 from app.core.config import settings
 from app.models.article import Article
@@ -8,9 +8,9 @@ from app.models.article import Article
 
 class BriefingAgent:
     def __init__(self) -> None:
-        if not settings.openai_api_key:
-            raise RuntimeError("OPENAI_API_KEY is required for briefing generation")
-        self.client = OpenAI(api_key=settings.openai_api_key)
+        if not settings.gemini_api_key:
+            raise RuntimeError("GEMINI_API_KEY is required for briefing generation")
+        self.client = genai.Client(api_key=settings.gemini_api_key)
 
     def generate(self, articles: list[Article]) -> str:
         payload = [
@@ -32,8 +32,8 @@ class BriefingAgent:
             "Do not invent facts. Use only supplied information.\n\n"
             + json.dumps(payload, ensure_ascii=False)
         )
-        response = self.client.responses.create(
-            model=settings.openai_model,
-            input=prompt,
+        response = self.client.models.generate_content(
+            model=settings.gemini_model,
+            contents=prompt,
         )
-        return response.output_text.strip()
+        return (response.text or "").strip()
