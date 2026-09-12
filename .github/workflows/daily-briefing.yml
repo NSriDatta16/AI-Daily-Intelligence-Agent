@@ -1,4 +1,4 @@
-name: Daily AI Intelligence
+name: My Daily AI Updates
 
 on:
   workflow_dispatch:
@@ -51,6 +51,6 @@ jobs:
           path: site
       - name: Deploy Pages
         id: deployment
-        uses: actions/deploy-pages@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/deploy-pages@v5
