@@ -2,8 +2,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    openai_api_key: str = ""
-    openai_model: str = "gpt-5-mini"
+    gemini_api_key: str = ""
+    gemini_model: str = "gemini-2.5-flash"
 
     email_enabled: bool = False
     smtp_host: str = "smtp.gmail.com"
