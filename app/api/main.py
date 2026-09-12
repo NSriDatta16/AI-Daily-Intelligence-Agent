@@ -10,12 +10,14 @@ from app.core.config import settings
 from app.ingestion.rss import collect
 from app.pipeline.process import deduplicate, rank
 from app.sources.feeds import SOURCES
+from app.storage.database import article_history, init_db, recent_briefings
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 STATIC_DIR = BASE_DIR / "app" / "static"
 
-app = FastAPI(title="AI Daily Intelligence Agent", version="0.2.0")
+app = FastAPI(title="AI Daily Intelligence Agent", version="0.3.0")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+init_db()
 
 
 @app.get("/")
@@ -25,7 +27,7 @@ def root():
 
 @app.get("/health")
 def health() -> dict:
-    return {"status": "healthy"}
+    return {"status": "healthy", "database": "connected"}
 
 
 @app.get("/preview")
@@ -41,10 +43,21 @@ def preview() -> dict:
                 "category": a.category,
                 "url": a.url,
                 "published_at": a.published_at.isoformat(),
+                "importance_score": a.importance_score,
             }
             for a in ranked
         ],
     }
+
+
+@app.get("/history")
+def history(limit: int = 7) -> dict:
+    return {"briefings": recent_briefings(max(1, min(limit, 30)))}
+
+
+@app.get("/articles")
+def articles(limit: int = 50) -> dict:
+    return {"articles": article_history(max(1, min(limit, 200)))}
 
 
 @app.get("/briefing")
@@ -74,6 +87,7 @@ def briefing() -> dict:
                 "url": a.url,
                 "summary": a.summary or "Open the source for the latest details.",
                 "published_at": a.published_at.isoformat(),
+                "importance_score": a.importance_score,
             }
             for a in ranked
         ],
