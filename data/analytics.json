@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-13T16:22:47.380029+00:00",
+  "generated_at": "2026-09-13T16:54:36.118270+00:00",
   "total_articles": 8,
-  "total_briefings": 5,
+  "total_briefings": 6,
   "sources": [
     {
       "source": "TechCrunch AI",
@@ -77,15 +77,6 @@
       "summary": "Tan wants smaller, American open-weight AI labs to use the same kind of training techniques on American frontier AI labs, giving the U.S. a more robust set of open-weight options that aren’t Chinese."
     },
     {
-      "title": "Anthropic CEO outlines plan to slow AI development",
-      "url": "https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/",
-      "source": "TechCrunch AI",
-      "category": "news",
-      "published_at": "2026-09-12T19:34:44+00:00",
-      "importance_score": 6.15,
-      "summary": "Anthropic's Dario Amodei and OpenAI's Sam Altman seem to agree that it's time to \"pace the frontier.\" What would that actually look like?"
-    },
-    {
       "title": "Mecka AI nears $500M valuation in Sequoia-led deal amid rush for robot training data",
       "url": "https://techcrunch.com/2026/09/11/mecka-ai-nears-500m-valuation-in-sequoia-led-deal-amid-rush-for-robot-training-data/",
       "source": "TechCrunch AI",
@@ -95,26 +86,31 @@
       "summary": "The round for the two-year-old startup is coming together months after Mecka announced its Series A."
     },
     {
+      "title": "Anthropic CEO outlines plan to slow AI development",
+      "url": "https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/",
+      "source": "TechCrunch AI",
+      "category": "news",
+      "published_at": "2026-09-12T19:34:44+00:00",
+      "importance_score": 6.084,
+      "summary": "Anthropic's Dario Amodei and OpenAI's Sam Altman seem to agree that it's time to \"pace the frontier.\" What would that actually look like?"
+    },
+    {
       "title": "OpenAI’s Sam Altman says it would be ‘ill-advised’ to go public in 2026",
       "url": "https://techcrunch.com/2026/09/12/openais-sam-altman-says-it-would-be-ill-advised-to-go-public-in-2026/",
       "source": "TechCrunch AI",
       "category": "news",
       "published_at": "2026-09-12T20:19:16+00:00",
-      "importance_score": 5.243,
+      "importance_score": 5.177,
       "summary": "While OpenAI has filed confidentially for an IPO, the company will not be going public this year, according to CEO Sam Altman."
     }
   ],
   "repeated_topics": [
     {
-      "topic": "trusts",
-      "mentions": 1
-    },
-    {
       "topic": "astra",
       "mentions": 1
     },
     {
-      "topic": "systems",
+      "topic": "trusts",
       "mentions": 1
     },
     {
@@ -122,11 +118,7 @@
       "mentions": 1
     },
     {
-      "topic": "openai’s",
-      "mentions": 1
-    },
-    {
-      "topic": "public",
+      "topic": "systems",
       "mentions": 1
     },
     {
@@ -134,7 +126,7 @@
       "mentions": 1
     },
     {
-      "topic": "altman",
+      "topic": "public",
       "mentions": 1
     },
     {
@@ -142,11 +134,11 @@
       "mentions": 1
     },
     {
-      "topic": "development",
+      "topic": "openai’s",
       "mentions": 1
     },
     {
-      "topic": "outlines",
+      "topic": "altman",
       "mentions": 1
     },
     {
@@ -154,15 +146,23 @@
       "mentions": 1
     },
     {
+      "topic": "outlines",
+      "mentions": 1
+    },
+    {
+      "topic": "development",
+      "mentions": 1
+    },
+    {
+      "topic": "living",
+      "mentions": 1
+    },
+    {
+      "topic": "evaluation",
+      "mentions": 1
+    },
+    {
       "topic": "benchmarks",
-      "mentions": 1
-    },
-    {
-      "topic": "benchmark",
-      "mentions": 1
-    },
-    {
-      "topic": "search",
       "mentions": 1
     }
   ]
