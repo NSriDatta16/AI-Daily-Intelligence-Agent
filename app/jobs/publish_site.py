@@ -3,6 +3,8 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+import requests
+
 from app.agent.summarizer import BriefingAgent
 from app.core.config import settings
 from app.ingestion.rss import collect
@@ -28,6 +30,39 @@ def _read_json(path: Path, default: dict | list) -> dict | list:
         return json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return default
+
+
+def _read_remote_json(filename: str, default: dict | list) -> dict | list:
+    """Load the previous Pages deployment so history survives ephemeral runners."""
+    base = settings.dashboard_url.rstrip("/")
+    try:
+        response = requests.get(f"{base}/{filename}", timeout=15)
+        response.raise_for_status()
+        payload = response.json()
+        return payload if isinstance(payload, type(default)) else default
+    except (requests.RequestException, ValueError, TypeError):
+        return default
+
+
+def _hydrate_history_from_pages() -> None:
+    """Merge the currently deployed history into the runner before generating today's data."""
+    remote_history = _read_remote_json("history.json", {"briefings": []})
+    if isinstance(remote_history, dict) and isinstance(remote_history.get("briefings"), list):
+        local = _read_json(DATA_DIR / "briefings.json", [])
+        existing = local if isinstance(local, list) else []
+        _write_json(
+            DATA_DIR / "briefings.json",
+            [*existing, *remote_history["briefings"]],
+        )
+
+    remote_articles = _read_remote_json("articles.json", {"articles": []})
+    if isinstance(remote_articles, dict) and isinstance(remote_articles.get("articles"), list):
+        local = _read_json(DATA_DIR / "articles.json", [])
+        existing = local if isinstance(local, list) else []
+        _write_json(
+            DATA_DIR / "articles.json",
+            [*existing, *remote_articles["articles"]],
+        )
 
 
 def _article_payload(article) -> dict:
@@ -104,6 +139,8 @@ def _build_analytics(articles: list[dict], briefings: list[dict]) -> dict:
 
 def run() -> str:
     init_db()
+    _hydrate_history_from_pages()
+
     articles = collect(SOURCES, settings.lookback_hours, settings.max_articles)
     articles = rank(deduplicate(articles), settings.top_stories)
     if not articles:
@@ -124,7 +161,6 @@ def run() -> str:
     }
     save_briefing(generated_at, settings.lookback_hours, briefing, articles)
 
-    # GitHub-hosted JSON is the durable history because Actions runners are ephemeral.
     briefings = _merge_history(current_briefing)
     all_articles = _merge_articles(current_articles)
     analytics = _build_analytics(all_articles, briefings)
@@ -143,13 +179,11 @@ def run() -> str:
         try:
             send_email(subject, briefing)
         except Exception as exc:
-            # Notifications must not prevent the dashboard from publishing.
             print(f"WARNING: email notification failed: {exc}")
     if settings.whatsapp_enabled:
         try:
             send_whatsapp(briefing)
         except Exception as exc:
-            # Notifications must not prevent the dashboard from publishing.
             print(f"WARNING: WhatsApp notification failed: {exc}")
 
     print(
