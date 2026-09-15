@@ -279,7 +279,3 @@ docker run --env-file .env -p 8000:8000 ai-signal-briefing
 ## Architecture Summary
 
 > A scheduled GenAI pipeline that ingests recent AI developments, applies deterministic quality and ranking logic, synthesizes a focused briefing with Gemini, persists historical intelligence, and publishes it through a searchable dashboard and notification channels.
-
-## License
-
-This project is maintained as a personal engineering portfolio project.
