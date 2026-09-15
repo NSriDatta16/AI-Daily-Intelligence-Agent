@@ -212,41 +212,6 @@ MAX_ARTICLES
 TOP_STORIES
 ```
 
-## Testing
-
-```bash
-pip install -r requirements-dev.txt
-PYTHONPATH=. pytest -q
-```
-
-The test suite covers pipeline behavior, publishing behavior, and authentication guards.
-
-## Local Development
-
-```bash
-pip install -r requirements.txt
-cp .env.example .env
-```
-
-Configure the required environment variables and run the publishing job:
-
-```bash
-PYTHONPATH=. python -m app.jobs.publish_site
-```
-
-Run the FastAPI application:
-
-```bash
-uvicorn app.api.main:app --reload
-```
-
-Run with Docker:
-
-```bash
-docker build -t ai-signal-briefing .
-docker run --env-file .env -p 8000:8000 ai-signal-briefing
-```
-
 ## Engineering Scope
 
 - Event-driven and scheduled processing
