@@ -21,15 +21,10 @@ class BriefingAgent:
         code = getattr(exc, "code", None)
         if isinstance(code, int) and code in cls.RETRYABLE_CODES:
             return True
-
-        name = type(exc).__name__
-        return name in {"RateLimitError", "InternalServerError", "ServerError"}
+        return type(exc).__name__ in {"RateLimitError", "InternalServerError", "ServerError"}
 
     def _generate_with_model(self, model: str, prompt: str) -> str:
         last_error: Exception | None = None
-
-        # Gemini can temporarily return 429/5xx during quota or capacity spikes.
-        # Retry with exponential backoff before switching to a fallback model.
         for attempt in range(4):
             try:
                 interaction = self.client.interactions.create(
@@ -52,6 +47,37 @@ class BriefingAgent:
                 time.sleep(delay)
 
         raise last_error or RuntimeError(f"Gemini generation failed for model {model}")
+
+    @staticmethod
+    def _fallback_briefing(articles: list[Article], errors: list[str]) -> str:
+        """Keep the daily pipeline publishable when every LLM endpoint is unavailable."""
+        lines = [
+            "# AI Daily Intelligence",
+            "",
+            "_Gemini was temporarily unavailable, so this briefing uses the latest collected article summaries._",
+            "",
+            "## Top Stories",
+        ]
+        for article in articles[:8]:
+            summary = (article.summary or "").strip()
+            if len(summary) > 500:
+                summary = summary[:497].rsplit(" ", 1)[0] + "..."
+            lines.extend([
+                f"### {article.title}",
+                f"**Source:** {article.source}  ",
+                f"**Category:** {article.category}  ",
+                f"**Why it matters:** {summary or 'See the source for the latest details.'}  ",
+                f"[Read source]({article.url})",
+                "",
+            ])
+        lines.extend([
+            "## What To Watch",
+            "Review the linked primary stories for developments, follow-ups, and announcements.",
+        ])
+        print("WARNING: using deterministic fallback briefing because Gemini was unavailable.")
+        for error in errors:
+            print(f"WARNING: {error}")
+        return "\n".join(lines)
 
     def generate(self, articles: list[Article]) -> str:
         payload = [
@@ -92,6 +118,4 @@ class BriefingAgent:
                 errors.append(f"{model}: {type(exc).__name__}: {exc}")
                 print(f"WARNING: Gemini model {model} exhausted retries: {exc}")
 
-        raise RuntimeError(
-            "All Gemini briefing models failed. " + " | ".join(errors)
-        )
+        return self._fallback_briefing(articles, errors)
