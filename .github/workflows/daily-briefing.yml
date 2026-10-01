@@ -3,9 +3,9 @@ name: My Daily AI Updates
 on:
   workflow_dispatch:
   schedule:
-    # 9:01 AM Toronto every day. Running just after the top of the hour
+    # 9:17 AM Toronto every day. Moving farther from the top of the hour
     # reduces the chance of GitHub Actions schedule-load delays.
-    - cron: '1 9 * * *'
+    - cron: '17 9 * * *'
       timezone: 'America/Toronto'
 
 permissions:
